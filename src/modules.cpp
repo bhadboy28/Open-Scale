@@ -1,0 +1,2 @@
+#include "openscale/modules.hpp"
+namespace openscale { std::vector<ModuleInfo> list_modules(){std::vector<ModuleInfo>m;for(auto&b:enumerate_backends())m.push_back({b.name,"backend",b.available?"available":"not built",b.available?"native execution module":"compile-time backend not enabled"});m.push_back({"GGUF","importer","available","safe metadata inspection"});m.push_back({"AV","container","available","indexed container"});m.push_back({"safetensors","importer","header-only","safe header validation"});return m;} }

@@ -1,0 +1,2 @@
+#include "openscale/tokenizer.hpp"
+namespace openscale { bool Tokenizer::load(const std::string&,std::string&){return false;} std::vector<uint32_t> Tokenizer::encode(const std::string&s)const{std::vector<uint32_t>o;o.reserve(s.size());for(unsigned char c:s)o.push_back(c);return o;}std::string Tokenizer::decode(const std::vector<uint32_t>&v)const{std::string s;for(auto x:v)if(x<256)s.push_back(char(x));return s;} }

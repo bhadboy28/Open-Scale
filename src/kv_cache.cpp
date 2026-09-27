@@ -1,0 +1,3 @@
+#include "openscale/kv_cache.hpp"
+#include <cstring>
+namespace openscale { bool KVCache::init(const KVConfig&c){cfg_=c;tokens_=0;uint64_t bytes=uint64_t(c.layers)*c.kv_heads*c.head_dim*c.max_tokens*2*c.bytes_per_element;if(bytes>size_t(-1))return false;try{data_.assign((size_t)bytes,0);}catch(...){data_.clear();return false;}return true;}void KVCache::reset(){tokens_=0;}bool KVCache::append(const void*p,size_t n){if(tokens_>=cfg_.max_tokens)return false;size_t stride=data_.empty()?0:data_.size()/cfg_.max_tokens;if(n>stride||stride==0)return false;std::memcpy(data_.data()+size_t(tokens_)*stride,p,n);++tokens_;return true;} }

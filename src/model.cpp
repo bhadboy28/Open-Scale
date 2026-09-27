@@ -1,0 +1,3 @@
+#include "openscale/model.hpp"
+#include "openscale/import.hpp"
+namespace openscale { bool Model::load(const std::filesystem::path&p,std::string&e){loaded_=false; if(p.extension()==".av"){AvReader r;if(!r.open(p,e)||!r.verify(e))return false;info_=r.info();tensors_=r.tensors();}else if(p.extension()==".gguf"){if(!inspect_gguf(p,info_,tensors_,e))return false;}else {e="model loader currently supports .av and GGUF metadata; use convert for other formats";return false;}graph_.nodes.clear();graph_.nodes.push_back({0,Op::Input,"input",{}});graph_.nodes.push_back({1,Op::Output,"output",{0}});loaded_=true;return true;} }
