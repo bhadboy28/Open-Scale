@@ -33,5 +33,8 @@ __pycache__/
 *.swp
 *~
 
+# Scripts
+publish_to_github.bat
+
 # Logs
 *.log
